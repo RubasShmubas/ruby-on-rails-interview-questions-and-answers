@@ -52,7 +52,7 @@ end
 Huass.who_am_i?
 # => An existentialist, that's who.
 
-Модули не могут быть использованы для инстанцирования объеток так, как классы:
+Модули не могут быть использованы для инстанцирования объектов так, как классы:
 
 AMixIn.new
 # => NoMethodError: undefined method ‘new’ for AMixIn:Module
