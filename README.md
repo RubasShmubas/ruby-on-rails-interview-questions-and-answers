@@ -77,8 +77,38 @@ AMixIn.new
 С помощью mixin-ов модулей
 ```
 
-- [ ] В чем разница между include и extend?
+## В чем разница между include и extend?
 
+```ruby
+include — добавляет методы модуля как методы инстанса в модуль/класс.
+
+class A
+  include M
+end
+
+A.ancestors
+#=> [A, M, Object, Kernel, BasicObject]
+
+extend — добавляет методы и константы модуля к метаклассу цели(синглтон классу)
+Если мы вызываем Klazz.extend(Mod), то Klazz получает доступ к методам Mod-а(как к классовым методам)
+Если мы вызываем obj.extend(Mod), то obj получает доступ к методам Mod-a(как к инстанс методам),
+но остальные инстансы obj.class-а этих методов не имеют.
+
+class A
+  extend M
+end
+
+A.singleton_class.ancestors
+#=> [M, Class, Module, Object, Kernel, BasicObject]
+
+Каждый вызов include проверяет подключаемый модуль на наличие метода included.
+Этот метод исполняется, когда модуль подключается, используя include.
+Это как конструктор (initialize) для подключений.
+У extend для этих целей есть собственный метод — extended.
+
+Подробнее: https://habrahabr.ru/post/143483/,
+http://stackoverflow.com/questions/156362/what-is-the-difference-between-include-and-extend-in-ruby
+```
 
 ## Что такое объект в руби?
 
