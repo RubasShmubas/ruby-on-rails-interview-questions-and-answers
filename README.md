@@ -258,7 +258,23 @@ olya.breast_size
 - [ ] В чем разница между Hash(Ruby) и HashWithIndifferentAccess(ActiveSupport)?
 
 
-- [ ] Что такое CSRF(Cross-Site Request Forgery)?
+## Что такое CSRF(Cross-Site Request Forgery)?
+
+```ruby
+CSRF stands for Cross-Site Request Forgery.
+This is a form of an attack where the attacker submits a form on your behalf
+to a different website, potentially causing damage or revealing sensitive information.
+Since browsers will automatically include cookies for a domain on a request,
+if you were recently logged in to the target site, the attacker’s request will
+appear to come from you as a logged-in user (as your session cookie will be sent with the POST request).
+
+In order to protect against CSRF attacks, you can add protect_from_forgery to your ApplicationController.
+This will then cause Rails to require a CSRF token to be present before accepting any
+POST, PUT, or DELETE requests. The CSRF token is included as a hidden field in every
+form created using Rails’ form builders. It is also included as a header in GET
+requests so that other, non-form-based mechanisms for sending a POST can use it as well.
+Attackers are prevented from stealing the CSRF token by browsers’ “same origin” policy.
+```
 
 
 - [ ] Для чего используется constraints опция в роутах?
