@@ -344,8 +344,21 @@ AccessLevel.new.something_interesting
 # => #<AccessLevel:0x898c8>
 ```
 
-- [ ] Какие есть синтаксические структуры для вызова метода в руби?
+## Какие есть синтаксические структуры для вызова метода в руби?
 
+```ruby
+точка-оператор, Object#send метод или method(:foo).call
+
+object = Object.new
+puts object.object_id
+ #=> 282660
+
+puts object.send(:object_id)
+ #=> 282660
+
+puts object.method(:object_id).call
+ #=> 282660
+```
 
 - [ ] Что означает self?
 
