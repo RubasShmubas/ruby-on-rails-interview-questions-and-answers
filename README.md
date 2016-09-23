@@ -116,8 +116,26 @@ http://stackoverflow.com/questions/156362/what-is-the-difference-between-include
 Объект - это инстанс класса. Также в руби есть рутовый класс Object. Классы наследуются от него.
 ```
 
-- [ ] Как объявляется и используется конструктор в руби?
+## Как объявляется и используется конструктор в руби?
 
+```ruby
+Это метод initialize.
+
+class Woman
+  def initialize(hair_color, breast_size)
+    @hair_color = hair_color
+    @breast_size = breast_size
+  end
+end
+
+Вызывается он методом new, аргументы, переданные в new попадают в initialize.
+
+olya = Woman.new('black', 4)
+olya.hair_color
+# => 'black'
+olya.breast_size
+# => 4
+```
 
 - [ ] В чем разница между строкой и символом?
 
