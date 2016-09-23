@@ -267,8 +267,25 @@ olya.breast_size
 - [ ] В чем разница между find и find_by_что-то?
 
 
-- [ ] Что означает a ||= b?
+## Что означает a ||= b?
 
+```ruby
+# a = b when a == false
+# иначе a остается неизменным
+a || a = b
+
+a = 1
+b = 2
+a ||= b #=> a = 1
+
+a = nil
+b = 2
+a ||= b #=> a = 2
+
+a = false
+b = 2
+a ||= b #=> a = 2
+```
 
 - [ ] Для чего нужны методы attr_reader, attr_writer, attr_accessor?
 
