@@ -377,8 +377,30 @@ puts object.method(:object_id).call
  #=> 282660
 ```
 
-- [ ] Что означает self?
+## Что означает self?
 
+```ruby
+self всегда отсылает к текущему объекту. Этот вопрос немного усложняется тем, что Классы сами по себе тоже объекты.
+
+class WhatIsSelf
+  def test
+    puts "At the instance level, self is #{ self }"
+  end
+
+  def self.test
+    puts "At the class level, self is #{ self }"
+  end
+end
+
+WhatIsSelf.test 
+# => At the class level, self is WhatIsSelf
+
+WhatIsSelf.new.test 
+# => At the instance level, self is #<WhatIsSelf:0x28190>
+
+На уровне класса self это сам класс, в данном случае WhatIsSelf
+На уровне инстанса self это инстанс, в данном случае инстанс класса WhatIsSelf 
+```
 
 - [ ] Какая система типов в руби?
 
