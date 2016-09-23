@@ -287,8 +287,40 @@ b = 2
 a ||= b #=> a = 2
 ```
 
-- [ ] Для чего нужны методы attr_reader, attr_writer, attr_accessor?
+## Для чего нужны методы attr_reader, attr_writer, attr_accessor?
 
+```ruby
+attr_accessor - это attr_writer + attr_reader.
+attr_writer - это сеттер, attr_reader - геттер
+
+attr_writer :age
+
+эквивалентно
+
+def age=(value)
+  @age = value
+end
+
+attr_reader :age
+
+эквивалентно
+
+def age
+  @age
+end
+
+attr_accessor :age
+
+эквивалентно
+
+def age=(value)
+  @age = value
+end
+
+def age
+  @age
+end
+```
 
 - [ ] Для чего нужна полиморфная связь?
 
