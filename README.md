@@ -255,8 +255,17 @@ olya.breast_size
 - [ ] Что такое REST?
 
 
-- [ ] В чем разница между Hash(Ruby) и HashWithIndifferentAccess(ActiveSupport)?
+## В чем разница между Hash(Ruby) и HashWithIndifferentAccess(ActiveSupport)?
 
+```ruby
+Hash класс из рубишной кор библиотеки сравнивает значения с помощью оператора ==.
+Это означает, что символьный ключ(:my_value) не может быть извлечен эквивалентной строкой('my_value').
+HashWithIndifferentAccess в свою очередь считает символьные и строковые ключи эквивалентными:
+
+h = HashWithIndifferentAccess.new
+h[:my_value] = 'foo'
+h['my_value'] #=> вернет "foo"
+```
 
 ## Что такое CSRF(Cross-Site Request Forgery)?
 
