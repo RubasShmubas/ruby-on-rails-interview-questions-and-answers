@@ -408,8 +408,76 @@ irb(main):012:0> "test".object_id
 Символы сравниваются быстрее строк из-за возможности сравнения по object_id, в строках же приходится сравнивать значения.
 ```
 
-- [ ] Что такое и в чем разница между лямбдой, проком и блоком в руби?
+## Что такое и в чем разница между лямбдой, проком и блоком в руби?
 
+```ruby
+# Block Examples
+
+[1,2,3].each { |x| puts x*2 }   # block is in between the curly braces
+
+[1,2,3].each do |x|
+  puts x*2                    # block is everything between the do and end
+end
+
+# Proc Examples             
+p = Proc.new { |x| puts x*2 }
+[1,2,3].each(&p)              # The '&' tells ruby to turn the proc into a block 
+
+proc = Proc.new { puts "Hello World" }
+proc.call                     # The body of the Proc object gets executed when called
+
+# Lambda Examples            
+lam = lambda { |x| puts x*2 }
+[1,2,3].each(&lam)
+
+lam = lambda { puts "Hello World" }
+lam.call
+
+Проки - объекты, блоки - нет.
+
+Блоки не могут быть сами по себе, они являются частью синтаксиса вызова метода:
+{ puts "Hello World"}       # syntax error  
+a = { puts "Hello World"}   # syntax error
+[1,2,3].each {|x| puts x*2} # only works as part of the syntax of a method call
+```
+#### Разница между проком и лямбдой:
+```ruby
+И прок, и лямбда - это объекты класса Proc.
+proc = Proc.new { puts "Hello world" }
+lam = -> { puts "Hello World" }
+
+proc.class # returns 'Proc'
+lam.class  # returns 'Proc'
+
+Разница первая: Лямбды проверяют кол-во входных аргументов, а проки - нет:
+lam = -> { |x| puts x }    # creates a lambda that takes 1 argument
+lam.call(2)                    # prints out 2
+lam.call                       # ArgumentError: wrong number of arguments (0 for 1)
+lam.call(1,2,3)                # ArgumentError: wrong number of arguments (3 for 1)
+
+proc = Proc.new { |x| puts x } # creates a proc that takes 1 argument
+proc.call(2)                   # prints out 2
+proc.call                      # returns nil
+proc.call(1,2,3)               # prints out 1 and forgets about the extra arguments
+
+Разница вторая: проки и лямбды по-разному реагируют на return. 
+Прок выполняется в той области, где был определен. Лямбда - в той, где была вызвана.
+def lambda_test
+  lam = lambda { return }
+  lam.call
+  puts "Hello world"
+end
+
+lambda_test                 # calling lambda_test prints 'Hello World'
+
+def proc_test
+  proc = Proc.new { return }
+  proc.call
+  puts "Hello world"
+end
+
+proc_test                 # calling proc_test prints nothing
+```
 
 - [ ] Для чего нужен yield?
 
