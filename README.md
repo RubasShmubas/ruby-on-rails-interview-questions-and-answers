@@ -558,8 +558,47 @@ end
 6
 ```
 
-- [ ] В чем разница между and(or) и &&(||)?
+## В чем разница между and(or) и &&(||)?
 
+```ruby
+and это то же самое, что &&, но с низким приоритетом.
+У and и or приоритет ниже, чем у =
+
+foo = :foo
+bar = nil
+
+a = foo and bar
+# => nil
+a
+# => :foo
+
+a = foo && bar
+# => nil
+a
+# => nil
+
+a = (foo and bar)
+# => nil
+a
+# => nil
+
+(a = foo) && bar
+# => nil
+a
+# => :foo
+
+Некие правила:
+
+Use &&/|| for boolean expressions, and/or for control flow. (Rule of thumb: If you have to use outer parentheses, you are using the wrong operators.)
+
+# boolean expression
+if some_condition && some_other_condition
+do_something
+end
+
+# control flow
+document.saved? or document.save!
+```
 
 - [ ] Как реализован Hash в руби?
 
