@@ -410,37 +410,98 @@ irb(main):012:0> "test".object_id
 
 ## Что такое и в чем разница между лямбдой, проком и блоком в руби?
 
+```
+Блок - это кусок кода между do и end или между { и }.
+do и end используются в многострочном блоке, {} используются в однострочном.
+Блоки не являются объектами.
+
+[1, 2, 3].each {|n| puts "Number #{n}"}
+Number 1
+Number 2
+Number 3
+ => [1, 2, 3]
+```
+
+#### Как работает yield?
+
 ```ruby
-# Block Examples
-
-[1,2,3].each { |x| puts x*2 }   # block is in between the curly braces
-
-[1,2,3].each do |x|
-  puts x*2                    # block is everything between the do and end
+def my_method
+  puts "reached the top"
+  yield
+  puts "reached the bottom"
 end
 
-# Proc Examples             
-p = Proc.new { |x| puts x*2 }
-[1,2,3].each(&p)              # The '&' tells ruby to turn the proc into a block 
+my_method do
+  puts "reached yield"
+end
 
-proc = Proc.new { puts "Hello World" }
-proc.call                     # The body of the Proc object gets executed when called
+reached the top
+reached yield
+reached the bottom
+ => nil
+ 
+Код блока выполняется тогда, когда my_method доходит до yield.
+Когда блок выполнен продолжает выполняться метод.
+```
 
-# Lambda Examples            
-lam = lambda { |x| puts x*2 }
-[1,2,3].each(&lam)
+#### Передача блока методу
 
-lam = lambda { puts "Hello World" }
-lam.call
+```ruby
+Методу не обязательно что-то прописывать, чтобы получать блок как параметр.
+В любой метод в руби можно передать блок.
+Однако если метод не использует yield, то блок не будет выполнен.
+С другой стороны, если в теле метода присутствует yield, то при вызове метода
+произойдет ошибка, если блок не был передан.
+Если хочется, чтобы блок был опционален, можно использовать метод block_given?
 
-Проки - объекты, блоки - нет.
+def my_method
+  yield if block_given?
+end
+
+Любой параметр, переданный в yield, будет служить параметром блоку. Важен порядок аргументов.
+
+def my_method
+ yield('John', 2)
+end
+
+my_method do |name, age|
+  puts "#{ name }  is #{ age } years old" # => John is 2 years old
+end
 
 Блоки не могут быть сами по себе, они являются частью синтаксиса вызова метода:
 { puts "Hello World"}       # syntax error  
 a = { puts "Hello World"}   # syntax error
 [1,2,3].each {|x| puts x*2} # only works as part of the syntax of a method call
 ```
+#### Что значит &block (амперсанд параметр)
+
+```
+Руби позволяет отправлять любой объект методу как будто это блок.
+Если метод получает не блок, то он вызывает метод to_proc на нем, чтобы преобразовать его к блоку.
+
+def my_method(&block)
+  puts block
+  block.call
+end
+
+my_method { puts "Hello!" }
+
+#<Proc:0x0000010124e5a8@tmp/example.rb:6>
+Hello!
+
+Метод call вызванный для блока это аналог yield.
+
+```
+
+#### Как работает .map(&:something)?
+
+```ruby
+.map(&:capitalize) в развернутом виде это .map { |title| title.capitalize }
+Это происходит из-за метода to_proc класса Символ
+```
+
 #### Разница между проком и лямбдой:
+
 ```ruby
 И прок, и лямбда - это объекты класса Proc.
 proc = Proc.new { puts "Hello world" }
@@ -478,9 +539,6 @@ end
 
 proc_test                 # calling proc_test prints nothing
 ```
-
-- [ ] Для чего нужен yield?
-
 
 - [ ] Собственная реализация метода each, map и inject (и других популярных методов)
 
