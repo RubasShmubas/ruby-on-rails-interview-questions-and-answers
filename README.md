@@ -540,8 +540,23 @@ end
 proc_test                 # calling proc_test prints nothing
 ```
 
-- [ ] Собственная реализация метода each, map и inject (и других популярных методов)
+## Собственная реализация метода each, map и inject (и других популярных методов)
 
+```ruby
+def my_map(array)
+  array.each_with_object([]) do |el, arr|
+    arr.push(yield el)
+  end
+end
+
+my_map([1, 2, 3]) do |number|
+  number * 2
+end
+
+2
+4
+6
+```
 
 - [ ] В чем разница между and(or) и &&(||)?
 
