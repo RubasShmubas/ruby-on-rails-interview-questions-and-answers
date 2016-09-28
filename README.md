@@ -600,10 +600,6 @@ end
 document.saved? or document.save!
 ```
 
-- [ ] Как реализован Hash в руби?
-
-
-- [ ] Что такое REST?
 
 
 ## В чем разница между Hash(Ruby) и HashWithIndifferentAccess(ActiveSupport)?
@@ -635,13 +631,6 @@ form created using Rails’ form builders. It is also included as a header in GE
 requests so that other, non-form-based mechanisms for sending a POST can use it as well.
 Attackers are prevented from stealing the CSRF token by browsers’ “same origin” policy.
 ```
-
-
-- [ ] Для чего используется constraints опция в роутах?
-
-
-- [ ] В чем разница между find и find_by_что-то?
-
 
 ## Что означает a ||= b?
 
@@ -698,27 +687,6 @@ def age
 end
 ```
 
-- [ ] Для чего нужна полиморфная связь?
-
-
-- [ ] Что такое assets pipeline?
-
-
-- [ ] MVC в рельсах
-
-
-- [ ] Что такое Filter методы? before/after
-
-
-- [ ] Какие переменные бывают в руби?
-
-
-- [ ] Как объявить глобальную переменную?
-
-
-- [ ] В чем разница между классовыми и инстансовыми переменными?
-
-
 ## Равенство в руби (методы equal?, eql?, == и ===)
 
 ```ruby
@@ -741,12 +709,6 @@ Fixnum === 42
 # все true
 # аналог kind_of?
 ```
-
-- [ ] Что делает метод #send?
-
-
-- [ ] Какие есть модули в рельсах?
-
 
 ## Какие есть три уровня доступа к методам класса или модуля?
 
@@ -889,6 +851,44 @@ WhatIsSelf.new.test
 
 - [ ] Почему у некоторых методов на конце “!”, а у других “?” ?
 
+
+- [ ] Для чего нужна полиморфная связь?
+
+
+- [ ] Что такое assets pipeline?
+
+
+- [ ] MVC в рельсах
+
+
+- [ ] Что такое Filter методы? before/after
+
+
+- [ ] Какие переменные бывают в руби?
+
+
+- [ ] Как объявить глобальную переменную?
+
+
+- [ ] В чем разница между классовыми и инстансовыми переменными?
+
+
+- [ ] Для чего используется constraints опция в роутах?
+
+
+- [ ] В чем разница между find и find_by_что-то?
+
+
+- [ ] Что делает метод #send?
+
+
+- [ ] Какие есть модули в рельсах?
+
+
+- [ ] Как реализован Hash в руби?
+
+
+- [ ] Что такое REST?
 
 
 # Разное
