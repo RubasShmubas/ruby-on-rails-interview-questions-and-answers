@@ -843,8 +843,15 @@ y = x + 3 #Wooo! Ruby won't like that
 перекладывают эту задачу на компилятор / интерпретатор.
 ```
 
-- [ ] В чем различие между Date.today и Date.current?
+## В чем различие между Date.today и Date.current?
 
+```ruby
+def current
+  ::Time.zone ? ::Time.zone.today : ::Date.today
+end
+
+Если определена таймзона, то вернется дата согласно таймзоне, иначе Date.today
+```
 
 - [ ] Что такое транзакции в базе данных и как они реализованы в рельсах?
 
