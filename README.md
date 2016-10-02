@@ -906,11 +906,12 @@ has_and_belongs_to_many
 Отдельно стоит упомянуть полиморфную связь и STI(single table inheritance)
 ```
 
-- [ ] Что такое ORM(Object-Relationship-Model) в рельсах?
+## В чем разница между false и nil в руби?
 
-
-- [ ] В чем разница между false и nil в руби?
-
+```ruby
+nil - инстанс NilClass-а, false - инстанс FalseClass-а
+false - boolean datatype
+```
 
 - [ ] Что может сделать миграция?
 
