@@ -543,23 +543,17 @@ proc_test                 # calling proc_test prints nothing
 ## Собственная реализация метода each, map и inject (и других популярных методов)
 
 ```ruby
-class Test
-  attr_accessor :obj
-
-  def initialize(obj)
-    @obj = obj
-  end
-
+module Enumerable
   def my_map
-    obj.each_with_object([]) do |el, arr|
+    each_with_object([]) do |el, arr|
       arr << (yield el)
     end
   end
 
   def my_each
     i = 0
-    while i < obj.size
-      yield obj[i]
+    while i < size
+      yield self[i]
       i += 1
     end
   end
